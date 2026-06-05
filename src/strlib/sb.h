@@ -12,7 +12,7 @@ bool sb_init(StringBuf* sb);
 bool sb_init_with_cap(StringBuf* sb, size_t init_cap);
 bool sb_init_from(StringBuf* sb, StringView sv);
 bool sb_init_from_cstr(StringBuf* sb, const char* cstr);
-void sb_destroy(StringBuf* sb);
+void sb_free(StringBuf* sb);
 
 bool sb_copy(const StringBuf* src, StringBuf* dst);
 void sb_move(StringBuf* src, StringBuf* dst);
