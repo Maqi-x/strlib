@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 typedef struct StringView {
     const char* data;
@@ -37,6 +38,29 @@ static inline bool sv_eql(StringView lhs, StringView rhs) {
     if (lhs.len != rhs.len) return false;
     if (lhs.data == rhs.data) return true;
     return memcmp(lhs.data, rhs.data, lhs.len) == 0;
+}
+
+static inline char sv_map_tolower(char c) {
+    return (char)tolower((unsigned char)c);
+}
+static inline char sv_map_toupper(char c) {
+    return (char)toupper((unsigned char)c);
+}
+
+static inline bool sv_eql_by(StringView lhs, StringView rhs, char (*map)(char)) {
+    if (lhs.len != rhs.len) return false;
+    if (lhs.data == rhs.data) return true;
+
+    for (size_t i = 0; i < lhs.len; ++i) {
+        if (map(lhs.data[i]) != map(rhs.data[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static inline bool sv_eql_icase(StringView lhs, StringView rhs) {
+    return sv_eql_by(lhs, rhs, sv_map_tolower);
 }
 
 static inline bool sv_starts_with(StringView sv, StringView prefix) {
