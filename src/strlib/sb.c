@@ -39,7 +39,7 @@ bool sb_init_from_cstr(StringBuf* sb, const char* cstr) {
     return sb_init_from(sb, sv_from_cstr(cstr));
 }
 
-void sb_destroy(StringBuf* sb) {
+void sb_free(StringBuf* sb) {
     free(sb->data);
     sb->data = NULL;
     sb->len = 0;
