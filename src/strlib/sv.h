@@ -82,7 +82,7 @@ static inline StringView sv_trim_prefix(StringView sv, StringView prefix) {
 
 static inline StringView sv_trim_suffix(StringView sv, StringView suffix) {
     if (!sv_ends_with(sv, suffix)) return sv;
-    return (StringView) { .data = sv.data, .len = suffix.len };
+    return (StringView) { .data = sv.data, .len = sv.len - suffix.len };
 }
 
 static inline StringView sv_trim(StringView sv, int (*pred)(int)) {
