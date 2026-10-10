@@ -119,6 +119,25 @@ static inline StringView sv_trim_space(StringView sv) {
     return sv_trim(sv, sl_is_space);
 }
 
+///////////// checks //////////////
+static inline bool sv_all(StringView sv, SlPredFn* pred) {
+    for (size_t i = 0; i < sv.len; ++i) {
+        if (!pred(sv.data[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static inline bool sv_any(StringView sv, SlPredFn* pred) {
+    for (size_t i = 0; i < sv.len; ++i) {
+        if (pred(sv.data[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
 ///////////// slicing /////////////
 static inline StringView sv_slice(StringView sv, size_t start, size_t end) {
     if (sv.data == NULL || start > end || end > sv.len) {
