@@ -18,7 +18,7 @@ bool sb_copy(const StringBuf* src, StringBuf* dst);
 void sb_move(StringBuf* src, StringBuf* dst);
 
 static inline StringView sb_view(const StringBuf* sb) {
-    return sv_from_data_and_len(sb->data, sb->len);
+    return sv_make(sb->data, sb->len);
 }
 
 bool sb_resize(StringBuf* sb, size_t new_len);
