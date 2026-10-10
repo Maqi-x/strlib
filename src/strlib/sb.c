@@ -1,4 +1,4 @@
-#include <strlib/sb.h>
+#include "sb.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -11,7 +11,7 @@ static size_t _sb_next_cap(size_t current_cap, size_t required_min_cap) {
         new_cap = required_min_cap;
     }
     return new_cap;
-} 
+}
 
 bool sb_init(StringBuf* sb) {
     return sb_init_with_cap(sb, EL_STRBUF_DEFAULT_CAP);
@@ -100,7 +100,7 @@ bool sb_reserve_exact(StringBuf* sb, size_t new_cap) {
     if (new_cap <= sb->cap) {
         return true;
     }
-    
+
     char* new_data = realloc(sb->data, new_cap);
     if (new_data == NULL) return false;
 
